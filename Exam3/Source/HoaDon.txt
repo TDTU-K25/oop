@@ -1,0 +1,5 @@
+T1,Le Han Quoc,90900,1.5
+T2,Cam Ai Cap,70500,0.8
+T3,Cherry Uc,715000,1.0
+B1,Banh An Sang,64500,4
+B2,Banh quy COSY,180000,2
