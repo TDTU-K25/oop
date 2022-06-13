@@ -1,0 +1,10 @@
+Tra Sua Phuc Long,50000
+Tra Dao,30000
+Tra Vai,25000
+Ca Phe Den,15000
+Ca Phe Sua Da,20000
+Bac Xiu,20000
+Espresso,28000
+Tra Dao Cam Sa,35000
+Latte Macchiato,37000
+Chocolate Da Xay,40000

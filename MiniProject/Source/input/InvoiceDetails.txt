@@ -1,0 +1,80 @@
+HD049,Tra Dao Cam Sa,2
+HD022,Tra Dao,3
+HD037,Latte Macchiato,2
+HD027,Ca Phe Sua Da,1
+HD029,Latte Macchiato,2
+HD001,Tra Dao,1
+HD045,Ca Phe Sua Da,3
+HD034,Tra Dao Cam Sa,3
+HD007,Chocolate Da Xay,2
+HD015,Ca Phe Sua Da,1
+HD023,Tra Vai,1
+HD023,Ca Phe Den,2
+HD038,Ca Phe Den,3
+HD049,Tra Vai,1
+HD024,Tra Vai,3
+HD026,Espresso,1
+HD019,Ca Phe Den,3
+HD043,Espresso,3
+HD019,Ca Phe Sua Da,2
+HD013,Tra Vai,3
+HD001,Chocolate Da Xay,3
+HD010,Ca Phe Sua Da,3
+HD008,Tra Dao Cam Sa,1
+HD040,Bac Xiu,3
+HD033,Ca Phe Sua Da,2
+HD011,Tra Sua Phuc Long,1
+HD020,Tra Dao Cam Sa,2
+HD025,Chocolate Da Xay,3
+HD004,Tra Sua Phuc Long,2
+HD009,Latte Macchiato,2
+HD016,Tra Vai,1
+HD014,Espresso,2
+HD048,Tra Sua Phuc Long,2
+HD024,Ca Phe Sua Da,2
+HD036,Tra Dao,3
+HD008,Tra Vai,1
+HD030,Chocolate Da Xay,2
+HD050,Chocolate Da Xay,3
+HD046,Espresso,2
+HD002,Bac Xiu,3
+HD041,Espresso,1
+HD017,Espresso,3
+HD030,Latte Macchiato,2
+HD032,Tra Sua Phuc Long,3
+HD041,Bac Xiu,3
+HD021,Latte Macchiato,1
+HD037,Chocolate Da Xay,3
+HD043,Ca Phe Sua Da,3
+HD047,Tra Sua Phuc Long,1
+HD006,Espresso,1
+HD020,Tra Sua Phuc Long,2
+HD031,Latte Macchiato,1
+HD007,Tra Dao Cam Sa,3
+HD003,Ca Phe Den,1
+HD035,Espresso,3
+HD049,Ca Phe Sua Da,2
+HD037,Tra Sua Phuc Long,2
+HD044,Tra Dao Cam Sa,3
+HD042,Bac Xiu,1
+HD002,Chocolate Da Xay,3
+HD017,Tra Vai,1
+HD039,Espresso,1
+HD048,Latte Macchiato,3
+HD014,Bac Xiu,3
+HD028,Tra Sua Phuc Long,1
+HD038,Espresso,3
+HD040,Latte Macchiato,1
+HD005,Tra Dao Cam Sa,1
+HD012,Tra Dao,2
+HD018,Tra Sua Phuc Long,1
+HD029,Ca Phe Sua Da,2
+HD018,Latte Macchiato,2
+HD012,Bac Xiu,1
+HD047,Bac Xiu,2
+HD001,Ca Phe Sua Da,1
+HD041,Ca Phe Den,3
+HD011,Espresso,3
+HD040,Tra Dao Cam Sa,2
+HD012,Chocolate Da Xay,3
+HD002,Tra Dao Cam Sa,1

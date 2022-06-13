@@ -1,0 +1,6 @@
+Phiên bản mới nhất:
+1.2 - 12/05/2022 - Cập nhật sơ đồ lớp chuyển 2 thuộc tính lớp FullTimeStaff sang protected.
+
+Các phiên bản cũ:
+1.1 - 11/05/2022 - Cập nhật phần mô tả toString() của lớp FullTimeStaff, SeasonalStaff và Manager. Cập nhật sơ đồ lớp FullTimeStaff, SeasonalStaff và Manager đổi kiểu dữ liệu của một số thuộc tính thành int. Cập nhật chính xác hình mô tả file cần nộp.
+1.0 - 10/05/2022 - Đề phiên bản đầu tiên
