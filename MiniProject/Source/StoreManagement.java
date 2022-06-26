@@ -151,7 +151,8 @@ public class StoreManagement {
             }
             seasonalStaffsIDWithTheirSalary.remove(idOfSeasonalStaffWithHighestSalary); // Remove the key(ID Of Seasonal
                                                                                         // Staff With Highest Salary)
-                                                                                        // from LinkedHashMap to get next ID
+                                                                                        // from LinkedHashMap to get
+                                                                                        // next ID
                                                                                         // Of Seasonal Staff With
                                                                                         // Highest Salary
         }
@@ -246,8 +247,9 @@ public class StoreManagement {
     }
 
     // requirement 4
-    private ArrayList<String> getDates() {
-        ArrayList<String> dates = new ArrayList<String>();
+    private LinkedHashSet<String> getDates() {
+        // Don't want to get duplicate dates => Use LinkedHashSet
+        LinkedHashSet<String> dates = new LinkedHashSet<String>();
         for (Invoice invoice : this.invoices) {
             String[] information = invoice.toString().split("_");
             dates.add(information[2]);
@@ -255,7 +257,7 @@ public class StoreManagement {
         return dates;
     }
 
-    private ArrayList<String> getDatesOfQuarter(ArrayList<String> dates, int quarter) {
+    private ArrayList<String> getDatesOfQuarter(LinkedHashSet<String> dates, int quarter) {
         ArrayList<String> datesOfQuarter = new ArrayList<String>();
         switch (quarter) {
             case 1:
@@ -319,13 +321,13 @@ public class StoreManagement {
     public double totalInQuarter(int quarter) {
         double total = 0;
         // code here
-        ArrayList<String> dates = getDates();
+        LinkedHashSet<String> dates = getDates();
         ArrayList<String> datesOfQuarter = getDatesOfQuarter(dates, quarter);
         ArrayList<String> invoicesIDOfDatesOfQuarter = getInvoicesIDOfDatesOfQuarter(datesOfQuarter);
         LinkedHashMap<String, Integer> drinksNameWithTheirPrice = getDrinksNameWithTheirPrice();
 
-        for (InvoiceDetails invoice : this.invoiceDetails) {
-            for (String invoiceIDOfDateOfQuarter : invoicesIDOfDatesOfQuarter) {
+        for (String invoiceIDOfDateOfQuarter : invoicesIDOfDatesOfQuarter) {
+            for (InvoiceDetails invoice : this.invoiceDetails) {
                 String[] information = invoice.toString().split("_");
                 if (information[0].equals(invoiceIDOfDateOfQuarter)) {
                     // information[1] is name of the drink which is the key of LinkedHashMap
@@ -338,7 +340,7 @@ public class StoreManagement {
     }
 
     // requirement 5
-    private ArrayList<String> getDatesOfMonth(ArrayList<String> dates, int month) {
+    private ArrayList<String> getDatesOfMonth(LinkedHashSet<String> dates, int month) {
         ArrayList<String> datesOfMonth = new ArrayList<String>();
         switch (month) {
             case 1:
@@ -454,61 +456,47 @@ public class StoreManagement {
         return invoicesIDOfDatesOfMonth;
     }
 
-    private ArrayList<String> getStaffsIDInFileInvoice() {
-        ArrayList<String> staffsIDInFileInvoice = new ArrayList<String>();
+    private LinkedHashSet<String> getStaffsIDHaveInvoicesInMonth(ArrayList<String> invoicesIDOfDatesOfMonth) {
+        // Don't want to get duplicate ID of staffs => Use LinkHashSet
+        LinkedHashSet<String> staffsIDHaveInvoicesInMonth = new LinkedHashSet<String>();
         for (Invoice invoice : this.invoices) {
-            String[] information = invoice.toString().split("_");
-            staffsIDInFileInvoice.add(information[1]);
-        }
-        return staffsIDInFileInvoice;
-    }
-
-    private static <T> ArrayList<T> removeDuplicates(ArrayList<T> list) {
-        // A Set does not allow duplicates
-        // LinkedHashSet does not allow duplicates as well it preserves the insertion
-        // order
-
-        // Create a new LinkedHashSet
-        Set<T> set = new LinkedHashSet<T>();
-
-        // Add the elements to set
-        set.addAll(list);
-
-        // Clear the list
-        list.clear();
-
-        // add the elements of set
-        // with no duplicates to the list
-        list.addAll(set);
-
-        // return the list
-        return list;
-    }
-
-    private LinkedHashMap<String, ArrayList<String>> getAllInvoicesIDOfEachStaff(
-            ArrayList<String> staffsIDInFileInvoice) {
-        LinkedHashMap<String, ArrayList<String>> allInvoicesIDOfEachStaff = new LinkedHashMap<String, ArrayList<String>>();
-        for (String staffID : staffsIDInFileInvoice) {
-            ArrayList<String> listInvoicesIDOfEachStaff = new ArrayList<String>();
-            for (Invoice invoice : this.invoices) {
+            for (String invoiceIDOfDatesOfMonth : invoicesIDOfDatesOfMonth) {
                 String[] information = invoice.toString().split("_");
-                if (staffID.equals(information[1])) {
-                    listInvoicesIDOfEachStaff.add(information[0]);
+                if (invoiceIDOfDatesOfMonth.equals(information[0])) {
+                    staffsIDHaveInvoicesInMonth.add(information[1]);
                 }
             }
-            allInvoicesIDOfEachStaff.put(staffID, listInvoicesIDOfEachStaff);
         }
-        return allInvoicesIDOfEachStaff;
+        return staffsIDHaveInvoicesInMonth;
     }
 
-    private LinkedHashMap<String, Integer> getStaffsIDWithTheirTotalRevenue(
-            LinkedHashMap<String, ArrayList<String>> allInvoicesIDOfEachStaff,
+    private LinkedHashMap<String, ArrayList<String>> getAllInvoicesIDOfEachStaffInMonth(
+            LinkedHashSet<String> staffsIDHaveInvoicesInMonth, ArrayList<String> datesOfMonth) {
+        LinkedHashMap<String, ArrayList<String>> allInvoicesIDOfEachStaffInMonth = new LinkedHashMap<String, ArrayList<String>>();
+        for (String staffID : staffsIDHaveInvoicesInMonth) {
+            ArrayList<String> listInvoicesIDOfThisStaff = new ArrayList<String>();
+            for (Invoice invoice : this.invoices) {
+                for (String dateOfMonth : datesOfMonth) {
+                    String[] information = invoice.toString().split("_");
+                    if (staffID.equals(information[1]) && dateOfMonth.equals(information[2])) {
+                        listInvoicesIDOfThisStaff.add(information[0]);
+                    }
+                }
+            }
+            allInvoicesIDOfEachStaffInMonth.put(staffID, listInvoicesIDOfThisStaff);
+        }
+        return allInvoicesIDOfEachStaffInMonth;
+    }
+
+    private LinkedHashMap<String, Integer> getStaffsIDWithTheirTotalRevenueInMonth(
+            LinkedHashMap<String, ArrayList<String>> allInvoicesIDOfEachStaffInMonth,
             LinkedHashMap<String, Integer> drinksNameWithTheirPrice) {
-        LinkedHashMap<String, Integer> staffsIDWithTheirTotalRevenue = new LinkedHashMap<String, Integer>();
-        for (String key : allInvoicesIDOfEachStaff.keySet()) {
-            ArrayList<String> listInvoicesID = allInvoicesIDOfEachStaff.get(key);
+        LinkedHashMap<String, Integer> staffsIDWithTheirTotalRevenueInMonth = new LinkedHashMap<String, Integer>();
+        for (String key : allInvoicesIDOfEachStaffInMonth.keySet()) {
+            // key is ID of staff
+            ArrayList<String> listInvoicesIDOfThisStaff = allInvoicesIDOfEachStaffInMonth.get(key);
             Integer totalRevenue = 0;
-            for (String invoiceID : listInvoicesID) {
+            for (String invoiceID : listInvoicesIDOfThisStaff) {
                 for (InvoiceDetails invoice : this.invoiceDetails) {
                     String[] information = invoice.toString().split("_");
                     if (invoiceID.equals(information[0])) {
@@ -517,33 +505,33 @@ public class StoreManagement {
                     }
                 }
             }
-            staffsIDWithTheirTotalRevenue.put(key, totalRevenue);
+            staffsIDWithTheirTotalRevenueInMonth.put(key, totalRevenue);
         }
-        return staffsIDWithTheirTotalRevenue;
+        return staffsIDWithTheirTotalRevenueInMonth;
     }
 
     public Staff getStaffHighestBillInMonth(int month) {
         Staff maxStaff = null;
         // code here
-        ArrayList<String> dates = getDates();
+        LinkedHashSet<String> dates = getDates();
         ArrayList<String> datesOfMonth = getDatesOfMonth(dates, month);
         ArrayList<String> invoicesIDOfDatesOfMonth = getInvoicesIDOfDatesOfMonth(datesOfMonth);
-        ArrayList<String> staffsIDInFileInvoice = getStaffsIDInFileInvoice();
-        removeDuplicates(staffsIDInFileInvoice);
-        LinkedHashMap<String, ArrayList<String>> allInvoicesIDOfEachStaff = getAllInvoicesIDOfEachStaff(
-                staffsIDInFileInvoice);
+        LinkedHashSet<String> staffsIDHaveInvoicesInMonth = getStaffsIDHaveInvoicesInMonth(invoicesIDOfDatesOfMonth);
+        LinkedHashMap<String, ArrayList<String>> allInvoicesIDOfEachStaffInMonth = getAllInvoicesIDOfEachStaffInMonth(
+                staffsIDHaveInvoicesInMonth, datesOfMonth);
         LinkedHashMap<String, Integer> drinksNameWithTheirPrice = getDrinksNameWithTheirPrice();
-        LinkedHashMap<String, Integer> staffsIDWithTheirTotalRevenue = getStaffsIDWithTheirTotalRevenue(
-                allInvoicesIDOfEachStaff, drinksNameWithTheirPrice);
+        LinkedHashMap<String, Integer> staffsIDWithTheirTotalRevenueInMonth = getStaffsIDWithTheirTotalRevenueInMonth(
+                allInvoicesIDOfEachStaffInMonth, drinksNameWithTheirPrice);
 
-        Integer theHighestTotalRevenue = (Collections.max(staffsIDWithTheirTotalRevenue.values())); // This will return
-                                                                                                    // max value in the
-                                                                                                    // LinkedHashMap
+        Integer theHighestTotalRevenue = (Collections.max(staffsIDWithTheirTotalRevenueInMonth.values())); // This will
+                                                                                                           // return
+        // max value in the
+        // LinkedHashMap
 
         // Find ID of staff with the highest total revenue in month
         String idOfStaffWithHighestTotalRevenue = "";
-        for (String key : staffsIDWithTheirTotalRevenue.keySet()) {
-            if (staffsIDWithTheirTotalRevenue.get(key).equals(theHighestTotalRevenue)) {
+        for (String key : staffsIDWithTheirTotalRevenueInMonth.keySet()) {
+            if (staffsIDWithTheirTotalRevenueInMonth.get(key).equals(theHighestTotalRevenue)) {
                 idOfStaffWithHighestTotalRevenue = key;
                 break;
             }
